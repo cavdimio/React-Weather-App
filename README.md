@@ -10,7 +10,7 @@
 
 Type cities around the world and see the weather! Enjoy the various HD background images that give the feeling of the city's weather! It is a project made purely for fun & it is still under construction.
 
-Visit the current version [here](https://thawing-caverns-80697.herokuapp.com/)
+Visit the current deployed version [here](https://evening-fortress-20708.herokuapp.com/)
 
 ## Getting Started
 
