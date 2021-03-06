@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# Weather-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Build Version](https://img.shields.io/badge/Build%20Version-v1.0alpha-red.svg?style=for-the-badge)
 
-## Available Scripts
+![Node Version](https://img.shields.io/badge/node.js-v14.14.0-339933?style=for-the-badge&logo=node.js)
 
-In the project directory, you can run:
+![React Version](https://img.shields.io/badge/react.js-v17.0.1-61DAF8?style=for-the-badge&logo=react)
 
-### `yarn start`
+### Find the weather around the world!!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Type cities around the world and see the weather! Enjoy the various HD background images that give the feeling of the city's weather! It is a project made purely for fun & it is still under construction.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Visit the current version [here](https://thawing-caverns-80697.herokuapp.com/)
 
-### `yarn test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### `yarn build`
+## Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You need to install [node.js](https://nodejs.org/en/) 14.14.0 or a later LTS release which comes with npm which comes with npm 6.14.4 or later.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You need to go to the [OpenWeather API](https://openweathermap.org/), register and request an API Key. Create an .env file and insert the following environmental variable:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+REACT_APP_WEATHER_API_KEY=/* Your_API_key */
+```
 
-### `yarn eject`
+## Installing
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Open the project in your editor and run
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+$ npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Deployment
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To run the build version ( localhost:5000 ):
 
-## Learn More
+```
+$ serve -s build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To run the development version ( localhost:3000 ):
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+$ npm start
+```
 
-### Code Splitting
+# Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- "bootstrap": "^4.6.0",
+- "dotenv": "^8.2.0",
+- "react": "^17.0.1",
+- "react-dom": "^17.0.1",
+- "react-scripts": "4.0.3",
+- "styled-components": "^5.2.1",
+- "web-vitals": "^1.0.1"
 
-### Analyzing the Bundle Size
+## API
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The [OpenWeather API](https://openweathermap.org/) is being used in this project.
 
-### Making a Progressive Web App
+## Possible future TODO List
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [x] Show weather of the choosen city.
+- [ ] Show more than one cities.
+- [ ] Show more weather statistics.
+- [ ] User could be able to choose the weather statistics he wants.

@@ -1,38 +1,40 @@
-.App {
-  text-align: center;
+.background-img {
+  background-image: url("./assets/clear.jpg");
+  background-size: cover;
+  background-position: center;
+  transition: 0.4 ease-out;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.background-img.background-img-clouds {
+  background-image: url("./assets/clouds.jpg");
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.background-img.background-img-mist {
+  background-image: url("./assets/mist.jpg");
 }
 
-.App-header {
-  background-color: #282c34;
+.background-img.background-img-snow {
+  background-image: url("./assets/snow.jpg");
+}
+
+.background-img.background-img-rain {
+  background-image: url("./assets/rain.jpg");
+}
+
+.background-img.background-img-thunderstorm {
+  background-image: url("./assets/thunderstorm.jpg");
+}
+
+.background-img.background-img-drizzle {
+  background-image: url("./assets/drizzle.jpg");
+}
+
+main {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.75)
+  );
+  padding: 25px;
 }
