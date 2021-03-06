@@ -36,12 +36,6 @@ $ npm install
 
 ## Deployment
 
-To run the build version ( localhost:5000 ):
-
-```
-$ serve -s build
-```
-
 To run the development version ( localhost:3000 ):
 
 ```
