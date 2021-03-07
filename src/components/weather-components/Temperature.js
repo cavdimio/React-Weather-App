@@ -28,11 +28,11 @@ const TemperatureStyle = styled.div`
 
 /* Temperature component */
 const Temperature = ({ temperature }) => {
-    return (
-        <TemperatureStyle>
-            {Math.round(temperature)}°C
-        </TemperatureStyle>
-    )
+  return (
+    <TemperatureStyle>
+      {temperature}°C
+    </TemperatureStyle>
+  )
 }
 
 export default Temperature
