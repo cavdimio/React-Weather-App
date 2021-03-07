@@ -41,9 +41,7 @@ function App() {
 
   /* Function that saves the city list */
   const onChangeOfCityList = (changedCityList) => {
-    /* Reverse city list in order for the more recent to appear on the top */
-    var reversedCityList = changedCityList.map(city => city).reverse();
-    setCityList(reversedCityList);
+    setCityList(changedCityList);
   }
 
   return (

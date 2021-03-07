@@ -14,10 +14,13 @@ const CityListTitleStyle = styled.ul`
 
 /* City List component */
 const CityList = ( { cityList } ) => {
+    /* Reverse city list in order for the more recent to appear on the top */
+    var reversedCityList = cityList.map(city => city).reverse();
+
     return (
         <CityListTitleStyle>
         {
-          cityList.map( (city, key) => {
+          reversedCityList.map( (city, key) => {
             return (
               <li key={key}> {city.cityName} {city.temperature}°C</li>
             );
