@@ -102,8 +102,22 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
                     weatherTitle: result.weather[0].main,
                     weatherDescription: result.weather[0].description
                 }
-                /* Save to list */
-                cityList.push(searchedCity);
+
+                /* Check again if city exists: This is true only when user modifies his query for the same city & the query is not the name of the city */
+                /* E.g. user inserts 1) "Athens"(query) --> result "Athens"(city.name) */
+                /* user then inserts 2) "athen"(query) --> result "Athens"(city.name) */
+                /* Check if it is the same city above fails since query(2nd time) != query(1nd time) && query(2nd time) != city.name, so the program will evaluate it as new city.
+                   The API will be called. In order to stop it from appear 2nd time in the list a check was inserted below */
+                var cityIsInList = false;
+                cityList.forEach( city => {
+                    if(searchedCity.cityName === city.cityName){
+                        cityIsInList = true;
+                    }
+                });
+                if (!cityIsInList){
+                    /* Save to list */
+                    cityList.push(searchedCity);
+                }
 
                 var maxCityListLength = 10; 
                 /* Check if list has more than 10 cities */
