@@ -13,7 +13,7 @@ import ReactGA from "react-ga";
 function App() {
 
   /* Google analytics */
-  ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
+  ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_CODE);
   ReactGA.pageview(window.location.pathname + window.location.search);
 
   /* Weather: Object with the weather data that come from the Weather API */

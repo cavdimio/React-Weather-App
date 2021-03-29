@@ -1,32 +1,32 @@
 .background-img {
-  background-image: url("./assets/clear.jpg");
+  background-image: url("./assets/clear.webp");
   background-size: cover;
   background-position: center;
   transition: 0.4 ease-out;
 }
 
 .background-img.background-img-clouds {
-  background-image: url("./assets/clouds.jpg");
+  background-image: url("./assets/clouds.webp");
 }
 
 .background-img.background-img-mist {
-  background-image: url("./assets/mist.jpg");
+  background-image: url("./assets/mist.webp");
 }
 
 .background-img.background-img-snow {
-  background-image: url("./assets/snow.jpg");
+  background-image: url("./assets/snow.webp");
 }
 
 .background-img.background-img-rain {
-  background-image: url("./assets/rain.jpg");
+  background-image: url("./assets/rain.webp");
 }
 
 .background-img.background-img-thunderstorm {
-  background-image: url("./assets/thunderstorm.jpg");
+  background-image: url("./assets/thunderstorm.webp");
 }
 
 .background-img.background-img-drizzle {
-  background-image: url("./assets/drizzle.jpg");
+  background-image: url("./assets/drizzle.webp");
 }
 
 main {
