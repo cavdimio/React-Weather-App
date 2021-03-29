@@ -8,9 +8,14 @@ import WeatherBox from "./components/WeatherBox";
 import CityListBox from "./components/CityListBox";
 import WelcomeMessage from "./components/WelcomeMessage";
 import ErrorHandling from "./components/ErrorHandling";
-
+import ReactGA from "react-ga";
 
 function App() {
+
+  /* Google analytics */
+  ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
   /* Weather: Object with the weather data that come from the Weather API */
   const [weather, setWeather] = useState("");
 
