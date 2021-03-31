@@ -10,6 +10,7 @@ const CityListTitleStyle = styled.ul`
   text-shadow: 2px 2px rgba(50, 50, 70, 0.5);
   list-style: none;
   text-align: center;
+  
 `;
 
 /* City List component */
