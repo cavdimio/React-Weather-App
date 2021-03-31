@@ -22,7 +22,7 @@ const CityList = ( { cityList } ) => {
         {
           reversedCityList.map( (city, key) => {
             return (
-              <li key={key}> {city.cityName} {city.temperature}°C</li>
+              <li key={key}> {city.query} {city.temperature}°C</li>
             );
           })
         }

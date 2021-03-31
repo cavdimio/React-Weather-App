@@ -11,10 +11,10 @@ const LocationStyle = styled.div`
 `;
 
 /* Location component */
-const Location = ({city, country}) => {
+const Location = ({query}) => {
     return (
         <LocationStyle>
-            {city}, {country}
+            {query}
         </LocationStyle>
     )
 }

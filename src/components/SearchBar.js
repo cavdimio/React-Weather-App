@@ -1,6 +1,7 @@
 /* Component that constructs the search bar */
 
 import styled from "styled-components"
+import PlacesAutocomplete, { geocodeByAddress } from "react-places-autocomplete"
 import { useState } from "react"
 
 /* Store API KEY from openweathermap */
@@ -13,32 +14,6 @@ const SearchBox = styled.div`
     margin: 0 auto 75px;
 `;
 
-/* Styling for the search box */
-const Input = styled.input.attrs(props => ({
-        type:"text",
-        placeholder: "E.g. London",
-    }))`
-    width: 60%;
-    padding: 15px;
-  
-    appearance: none;
-    background: none;
-    border: none;
-    outline: none;
-
-    background-color:rgba(255, 255, 255, 0.6);
-    border-radius: 16px 16px 16px 16px;
-    box-shadow: 0px 5px rgba(0, 0, 0, 0.6);
-    margin-top: 5px;
-
-    color: #313131;
-    font-size: 20px;
-    transition: 0.4s ease;
-
-    &:focus{
-        background-color: rgba(255, 255, 255, 0.75);
-    }
-`;
 
 /* Search bar component */
 const SearchBar = ({ handleWeather, handleCityList }) => {
@@ -46,9 +21,29 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
     /* Query: City-name that is being inserted from the user */
     const [query, setQuery] = useState("");
 
-    const search = (evt) => {
-    if (evt.key === "Enter") {
-    
+    const handleSelect = async query => {
+
+        //Check if there is a comma 
+        const results = await geocodeByAddress(query);
+
+        var cityName, countryCode, stateCode = "" 
+
+        results[0].address_components.forEach(address => {
+            if(address.types[0] === "locality"){
+                cityName = address.short_name;
+            }else if (address.types[0] === "country"){
+                countryCode = address.short_name;
+            }
+            else if (address.types[0] === "administrative_area_level_1"){
+                stateCode = address.short_name;
+            }
+        });
+        if( countryCode === "US"){
+            query = cityName + "," + stateCode + "," + countryCode;        
+        }
+        else { 
+            query = cityName + "," + countryCode;
+        }
         /* Fetch data from local storage */
         var cityList = JSON.parse(window.localStorage.getItem('weather-app-cityList'));
         /* Check if cityList is a non-existent variable in localStorage */
@@ -63,7 +58,7 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
         var foundCity; 
 
         cityList.forEach( city => {
-            if(query.toLowerCase() === city.query || query === city.cityName){
+            if(query === city.query){
                 cityIsInList = true;
                 foundCity = city;
                 /* Delete the city */
@@ -95,22 +90,15 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
 
                 /* Store searched city's weather */
                 searchedCity = {
-                    query: query.toLowerCase(),
-                    cityName: result.name,
-                    countryCode: result.sys.country,
+                    query: query,
                     temperature: Math.round(result.main.temp),
                     weatherTitle: result.weather[0].main,
                     weatherDescription: result.weather[0].description
                 }
 
-                /* Check again if city exists: This is true only when user modifies his query for the same city & the query is not the name of the city */
-                /* E.g. user inserts 1) "Athens"(query) --> result "Athens"(city.name) */
-                /* user then inserts 2) "athen"(query) --> result "Athens"(city.name) */
-                /* Check if it is the same city above fails since query(2nd time) != query(1nd time) && query(2nd time) != city.name, so the program will evaluate it as new city.
-                   The API will be called. In order to stop it from appear 2nd time in the list a check was inserted below */
                 var cityIsInList = false;
                 cityList.forEach( city => {
-                    if(searchedCity.cityName === city.cityName){
+                    if(searchedCity.query === city.query){
                         cityIsInList = true;
                     }
                 });
@@ -138,23 +126,66 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
                 setQuery("");
             })
             .catch(err => {
-                /* User inserted uncorrect value; create error & errorMessage */
-                var error = {
-                    errorCode: 500,
-                    errorMessage: "Sorry! City \"" + query + "\" not found. Please type again!"
-                }
-                setQuery("");
-                /* Return error instead of weather */
-                handleWeather(error)
+                    /* User inserted uncorrect value; create error & errorMessage */
+                    var error = {
+                        errorCode: 500,
+                        errorMessage: "Sorry! City \"" + query + "\" not found. Please type again!"
+                    }
+                    setQuery("");
+                    /* Return error instead of weather */
+                    handleWeather(error)
             });
-        }  
-    }
-  };
+        } 
+    };
 
+    const handleChange = (value) => {
+        setQuery(value)
+    };
+    
     return (
         <SearchBox>
-            <Input onChange={e => setQuery(e.target.value)} 
-                   value={query}  onKeyPress={search}/>
+            <PlacesAutocomplete 
+            value={query}
+            onChange={handleChange} 
+            onSelect={handleSelect}                   
+            searchOptions={ {types: ['(cities)']} }>
+
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                <div>
+                    <input
+                        {...getInputProps({
+                                placeholder: "E.g. London...",
+                                className: 'location-search-input',
+                        })}
+                    />
+                    <ul className="autocomplete-dropdown-container">
+                        {loading ? <div>Loading...</div> : null}
+                        
+                        {suggestions.map(suggestion => {
+                            const style = {
+                                fontFamily: "Poppins",  
+                                padding: "10px",
+                                fontSize: "17px",
+                                width: "60%",
+                                margin: "0 auto",
+                                backgroundColor: suggestion.active ? 'rgba(255, 255, 255, 0.6)' : 'rgba(255, 255, 255, 0.3)', 
+                                fontWeight: suggestion.active ? 'bold' : 'normal', 
+                                cursor: 'pointer'
+                            }
+                            return (
+                                <li
+                                    {...getSuggestionItemProps(suggestion, { 
+                                        style
+                                        })}
+                                >
+                                    <span>{suggestion.description}</span>
+                                </li>
+                            );
+                        })}
+                    </ul> 
+                </div>
+            )}
+            </PlacesAutocomplete> 
         </SearchBox>
     )
 }

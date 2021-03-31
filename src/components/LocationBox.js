@@ -12,10 +12,10 @@ const LocationBoxStyle = styled.div`
 `;
 
 /* Location box component */
-const LocationBox = ({city, country}) => {
+const LocationBox = ({query}) => {
     return (
         <LocationBoxStyle>
-            <Location city={city} country={country}/>
+            <Location query={query} />
             <DateLocation />
         </LocationBoxStyle>
     )

@@ -74,7 +74,7 @@ function App() {
         ) : (
           /* User typed found city; show weather statistics */
           <div>
-            <LocationBox city={weather.cityName} country={weather.countryCode} />
+            <LocationBox query={weather.query} />
             <WeatherBox
                 temperature={weather.temperature}
                 typeOfWeather={weather.weatherDescription}

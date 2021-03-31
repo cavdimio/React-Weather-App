@@ -38,3 +38,34 @@ main {
   );
   padding: 25px;
 }
+
+.location-search-input {
+  width: 60%;
+  padding: 15px;
+
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 16px 16px 16px 16px;
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.6);
+  margin-top: 5px;
+
+  color: #313131;
+  font-size: 20px;
+  transition: 0.4s ease;
+}
+
+.location-search-input:focus {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.autocomplete-dropdown-container {
+  list-style-type: none;
+}
+
+.autocomplete-dropdown-container li:last-child {
+  border-radius: 0px 0px 16px 16px;
+}
