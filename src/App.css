@@ -69,3 +69,16 @@ main {
 .autocomplete-dropdown-container li:last-child {
   border-radius: 0px 0px 16px 16px;
 }
+
+/* .container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+} */
+
+.leaflet-container {
+  width: 65%;
+  height: 70vh;
+}

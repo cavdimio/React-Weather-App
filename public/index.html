@@ -10,6 +10,7 @@
       content="Weather App"
     />
 
+    <title>Weather App</title>
     <!-- Meta tag for Google to verify the ownership (for organic rank)-->
     <meta name="google-site-verification" content="%REACT_APP_GOOGLE_ORGANIC_RANK_ID%" />
 
@@ -23,7 +24,14 @@
     <!-- Google API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=%REACT_APP_GOOGLE_API_KEY%&libraries=places"></script>
 
-    <title>Weather App</title>
+    <!-- Leaflet Script for Maps -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+
+    
   </head>
   <body>
     <div id="root"></div>

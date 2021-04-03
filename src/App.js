@@ -8,6 +8,7 @@ import WeatherBox from "./components/WeatherBox";
 import CityListBox from "./components/CityListBox";
 import WelcomeMessage from "./components/WelcomeMessage";
 import ErrorHandling from "./components/ErrorHandling";
+import MapBox from "./components/MapBox";
 import ReactGA from "react-ga";
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
       window.localStorage.removeItem('weather-app-cityList');
     }
   }
-       
+  
   /* CityList: Object with the last 10 saved searches */
   var previousCityList = JSON.parse(window.localStorage.getItem('weather-app-cityList'));
   if(previousCityList === null){
@@ -74,11 +75,12 @@ function App() {
         ) : (
           /* User typed found city; show weather statistics */
           <div>
-            <LocationBox query={weather.query} />
-            <WeatherBox
-                temperature={weather.temperature}
-                typeOfWeather={weather.weatherDescription}
-            />
+              <MapBox coordinates={weather.coordinates}/>
+              <LocationBox query={weather.query} />
+              <WeatherBox
+                  temperature={weather.temperature}
+                  typeOfWeather={weather.weatherDescription}
+              />
           </div>
         ))}
 

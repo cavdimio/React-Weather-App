@@ -91,6 +91,7 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
                 /* Store searched city's weather */
                 searchedCity = {
                     query: query,
+                    coordinates: { lat: result.coord.lat , lon: result.coord.lon },
                     temperature: Math.round(result.main.temp),
                     weatherTitle: result.weather[0].main,
                     weatherDescription: result.weather[0].description
