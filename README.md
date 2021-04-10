@@ -1,6 +1,6 @@
 # Weather-App
 
-![Build Version](https://img.shields.io/badge/Build%20Version-v1.0alpha-red.svg?style=for-the-badge)
+![Build Version](https://img.shields.io/badge/Build%20Version-v1.1alpha-red.svg?style=for-the-badge)
 
 ![Node Version](https://img.shields.io/badge/node.js-v14.14.0-339933?style=for-the-badge&logo=node.js)
 
@@ -18,12 +18,30 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Prerequisites
 
-You need to install [node.js](https://nodejs.org/en/) 14.14.0 or a later LTS release which comes with npm which comes with npm 6.14.4 or later.
+1. You need to install [node.js](https://nodejs.org/en/) 14.14.0 or a later LTS release which comes with npm which comes with npm 6.14.4 or later.
 
-You need to go to the [OpenWeather API](https://openweathermap.org/), register and request an API Key. Create an .env file and insert the following environmental variable:
+2. You need to go to the [OpenWeather API](https://openweathermap.org/), register and request an API Key. Create an .env file and insert the following environmental variable:
 
 ```javascript
 REACT_APP_WEATHER_API_KEY=/* Your_API_key */
+```
+
+3. You need to activate the Google Places API & Google Geolocation API. Insert the Google API key in the following environmental variable:
+
+```javascript
+REACT_APP_GOOGLE_API_KEY=/* Your_Google_API_key */
+```
+
+4. You need an Google Analytics tracking code ID which should be included in the following environmental variable:
+
+```javascript
+REACT_APP_GA_TRACKING_CODE=/* Your_Google_Analytics_Tracking_Code */
+```
+
+5. You need an Google Search Console which should be included in the following environmental variable:
+
+```javascript
+REACT_APP_GOOGLE_ORGANIC_RANK_ID=/* Your_Google_ownership_verification_code */
 ```
 
 ## Installing
@@ -54,11 +72,15 @@ $ npm start
 
 ## API
 
-The [OpenWeather API](https://openweathermap.org/) is being used in this project.
+This project is using the following APIs:
+
+- [OpenWeather API](https://openweathermap.org/)
+- [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview)
+- [Google Geolocation API](https://developers.google.com/maps/documentation/geolocation/overview)
 
 ## Possible future TODO List
 
 - [x] Show weather of the choosen city.
-- [ ] Show more than one cities.
-- [ ] Show more weather statistics.
-- [ ] User could be able to choose the weather statistics he wants.
+- [ ] Add forecast.
+- [ ] Add relative domain.
+- [ ] Add interactive city map.

@@ -26,7 +26,8 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
         //Check if there is a comma 
         const results = await geocodeByAddress(query);
 
-        var cityName, countryCode, stateCode = "" 
+        var cityName = "", countryCode, stateCode = "" 
+        console.log(results);
 
         results[0].address_components.forEach(address => {
             if(address.types[0] === "locality"){
@@ -38,12 +39,22 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
                 stateCode = address.short_name;
             }
         });
-        if( countryCode === "US"){
+
+        if( cityName === ""){
+            results[0].address_components.forEach(address => {
+                if(address.types[0] === "administrative_area_level_1"){
+                    cityName = address.long_name;
+                    query = cityName + "," + countryCode;
+                }
+            })
+        }
+        else if( countryCode === "US"){
             query = cityName + "," + stateCode + "," + countryCode;        
         }
         else { 
             query = cityName + "," + countryCode;
         }
+
         /* Fetch data from local storage */
         var cityList = JSON.parse(window.localStorage.getItem('weather-app-cityList'));
         /* Check if cityList is a non-existent variable in localStorage */
