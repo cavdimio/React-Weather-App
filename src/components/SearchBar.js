@@ -1,7 +1,7 @@
 /* Component that constructs the search bar */
 
 import styled from "styled-components"
-import PlacesAutocomplete, { geocodeByAddress } from "react-places-autocomplete"
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete"
 import { useState } from "react"
 
 /* Store API KEY from openweathermap */
@@ -14,7 +14,6 @@ const SearchBox = styled.div`
     margin: 0 auto 75px;
 `;
 
-
 /* Search bar component */
 const SearchBar = ({ handleWeather, handleCityList }) => {
 
@@ -25,9 +24,9 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
 
         //Check if there is a comma 
         const results = await geocodeByAddress(query);
+        const lngLat = await getLatLng(results[0]);
 
         var cityName = "", countryCode, stateCode = "" 
-        console.log(results);
 
         results[0].address_components.forEach(address => {
             if(address.types[0] === "locality"){
@@ -107,6 +106,14 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
                     weatherDescription: result.weather[0].description
                 }
 
+                const part= "current,minutely,hourly,alerts"
+                fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lngLat.lat}&lon=${lngLat.lng}&exclude=${part}&units=metric&appid=${REACT_APP_WEATHER_API_KEY}`)
+                .then( (response) => response.json())
+                .then((forecastData) => {
+                    console.log(forecastData);
+                })
+                
+
                 var cityIsInList = false;
                 cityList.forEach( city => {
                     if(searchedCity.query === city.query){
@@ -152,6 +159,8 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
     const handleChange = (value) => {
         setQuery(value)
     };
+
+
     
     return (
         <SearchBox>
