@@ -76,8 +76,8 @@ function App() {
           <div>
             <LocationBox query={weather.query} />
             <WeatherBox
-                temperature={weather.temperature}
-                typeOfWeather={weather.weatherDescription}
+                temperature={weather.weatherData.today.temperature}
+                typeOfWeather={weather.weatherData.today.description}
             />
           </div>
         ))}

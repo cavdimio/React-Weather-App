@@ -26,12 +26,55 @@ const TemperatureStyle = styled.div`
 
 `;
 
+/* Styling for the div around the temperature */
+const TitleStyle = styled.h6`
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  font-weight: 500;
+  text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
+
+  @media only screen and (max-device-width: 480px) {
+    font-size: 1rem;
+  }
+
+  @media only screen and (min-device-width: 481px) {
+    font-size: 3.375rem;
+  }
+
+`;
+
+
 /* Temperature component */
 const Temperature = ({ temperature }) => {
   return (
-    <TemperatureStyle>
-      {temperature}°C
-    </TemperatureStyle>
+    <div>
+      
+      
+      <TemperatureStyle> 
+          <TitleStyle>Morning</TitleStyle>
+          <br />
+        {temperature[0]}°C
+      </TemperatureStyle>
+      
+      <TemperatureStyle>
+        <TitleStyle>Day</TitleStyle>
+        <br />
+        {temperature[1]}°C
+      </TemperatureStyle>
+      
+      <TemperatureStyle>
+        <TitleStyle>Evening</TitleStyle>
+        <br />
+        {temperature[2]}°C
+      </TemperatureStyle>
+      
+      <TemperatureStyle>
+        <TitleStyle>Night</TitleStyle>
+        <br />
+        {temperature[3]}°C
+      </TemperatureStyle>
+    </div>
   )
 }
 
