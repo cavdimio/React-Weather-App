@@ -1,13 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import LocationBox from "./components/LocationBox";
-import WeatherBox from "./components/WeatherBox";
-import CityListBox from "./components/CityListBox";
 import WelcomeMessage from "./components/WelcomeMessage";
 import ErrorHandling from "./components/ErrorHandling";
+import DesktopTab from "./components/DesktopTab";
 import ReactGA from "react-ga";
 
 function App() {
@@ -19,36 +18,18 @@ function App() {
   /* Weather: Object with the weather data that come from the Weather API */
   const [weather, setWeather] = useState("");
 
-  /* Bring date from local storage to compare with today's date. */
-  var previousDate = JSON.parse(window.localStorage.getItem('weather-app-date'));
-  /* Check if previous date exist */
-  if(previousDate !== null){
-    /* Previous date exists */
-    var date = Date();
-    /* Compare previous date with today's date   */
-    if (previousDate !== date.substr(0, 15)){
-      /* If different, then it's a different day & remove weather-app-cityList from LocalStorage */
-      window.localStorage.removeItem('weather-app-cityList');
-    }
-  }
-       
-  /* CityList: Object with the last 10 saved searches */
-  var previousCityList = JSON.parse(window.localStorage.getItem('weather-app-cityList'));
-  if(previousCityList === null){
-    previousCityList = [];
-  }
-  const [cityList, setCityList] = useState(previousCityList);
-  
   /* Function that saves the weather data */
   const onChangeWeather = (changedWeather) => {
     setWeather(changedWeather); 
   };
 
-  /* Function that saves the city list */
-  const onChangeOfCityList = (changedCityList) => {
-    setCityList(changedCityList);
-  }
+  //Width 
+  const [width, setWidth] = useState(window.innerWidth);
 
+  useEffect( () => {
+    window.addEventListener("resize", () => setWidth(window.innerWidth));
+  });
+  
   return (
     /* Set background image according to weather*/
     <div className={
@@ -62,33 +43,25 @@ function App() {
     }>
       <main>
         <Header />
-        <SearchBar handleWeather={onChangeWeather} handleCityList={onChangeOfCityList} />
+        <SearchBar handleWeather={onChangeWeather} />
         {/* Check if user hasn't typed anything yet */}
         {weather === "" ? (
           /* User hasn't typed anything yet; show welcome message */
-          <WelcomeMessage />
+          <WelcomeMessage />  ) :
           /* Check if user typed unfound city */
-        ) : ( weather.errorCode !== undefined ? (
+         ( weather.errorCode !== undefined ? (
            /* User typed unfound city; show error message  */
-           <ErrorHandling errorMessage={weather.errorMessage}/>
-        ) : (
-          /* User typed found city; show weather statistics */
-          <div>
+           <ErrorHandling errorMessage={weather.errorMessage}/> ) :
+         ( /* User typed found city; show weather statistics */
+          <>
             <LocationBox query={weather.query} />
-            <WeatherBox
-                temperature={weather.weatherData.today.temperature}
-                typeOfWeather={weather.weatherData.today.description}
+            <DesktopTab windowWidth={width} 
+                        temperature={weather.weatherData.today.temperature}
+                        typeOfWeather={weather.weatherData.today.description}
             />
-          </div>
-        ))}
-
-        {/* Check if there is cityList */}
-        {cityList.length > 0 ? (
-          /* CityList exists; show city list*/
-          <CityListBox cityList={cityList} />
-        ) : 
-        /* CityList doesn't exist; show nothing */
-        ("")}
+            
+          </> ))}
+            
       </main>
     </div>
   );

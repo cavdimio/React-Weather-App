@@ -28,6 +28,7 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
 
         var cityName = "", countryCode, stateCode = "" 
 
+        /* Reform the query */
         results[0].address_components.forEach(address => {
             if(address.types[0] === "locality"){
                 cityName = address.short_name;
@@ -54,47 +55,10 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
             query = cityName + "," + countryCode;
         }
 
-        /* Fetch data from local storage */
-        var cityList = JSON.parse(window.localStorage.getItem('weather-app-cityList'));
-        /* Check if cityList is a non-existent variable in localStorage */
-        if(cityList === null){
-            /* CityList doesn't exist in local Storage; create it */
-            cityList = [];
-        }
-
-        /* Check if city is in the list */
-        var cityIsInList = false;
         var searchedCity;
-        var foundCity; 
 
-        cityList.forEach( city => {
-            if(query === city.query){
-                cityIsInList = true;
-                foundCity = city;
-                /* Delete the city */
-                cityList = cityList.filter((city) => {
-                    return city !== foundCity;
-                })
-                /*  Insert the city again in order to go to the top of the list */
-                cityList.push(foundCity);
-            }
-        });
-       
-        if(cityIsInList)
-        {    
-            /* City is in the list, so return the city */ 
-            searchedCity = foundCity;
-            /* Return foundCity to App.js*/
-            handleWeather(searchedCity);
-            /* Return cityList to App.js*/
-            handleCityList(cityList);
-            setQuery("");
-        }
-        else
-        {
-
-            const excludePart = "current,minutely,hourly,alerts"
-            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lngLat.lat}&lon=${lngLat.lng}&exclude=${excludePart}&units=metric&appid=${REACT_APP_WEATHER_API_KEY}`)
+        const excludePart = "current,minutely,hourly,alerts"
+        fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lngLat.lat}&lon=${lngLat.lng}&exclude=${excludePart}&units=metric&appid=${REACT_APP_WEATHER_API_KEY}`)
             .then( (response) => response.json())
             .then((forecastData) => {
 
@@ -109,33 +73,9 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
                     weatherData: weatherData
                 }
 
-                var cityIsInList = false;
-                cityList.forEach( city => {
-                    if(searchedCity.query === city.query){
-                        cityIsInList = true;
-                    }
-                });
-                if (!cityIsInList){
-                    /* Save to list */
-                    cityList.push(searchedCity);
-                }
-    
-                var maxCityListLength = 10; 
-                /* Check if list has more than 10 cities */
-                if(cityList.length > maxCityListLength){
-                    /* Slice the first(oldest) element */
-                    cityList = cityList.slice(cityList.length-maxCityListLength, cityList.length);
-                }
-    
-                /* Add data to localStorage */
-                localStorage.setItem('weather-app-cityList', JSON.stringify(cityList));
-               
                 /* Pass data from API to App.js */
                 handleWeather(searchedCity);
-    
-                /* Return cityList to App.js*/
-                handleCityList(cityList);
-    
+      
                 setQuery("");
             })
             .catch(err => {
@@ -148,7 +88,6 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
                 /* Return error instead of weather */
                 handleWeather(error)
             });  
-        } 
     };
 
     const handleChange = (value) => {
