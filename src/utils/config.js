@@ -69,7 +69,18 @@ export const CONFIG = {
             date: "Wed 30/04"
         },
 
-    ]
+    ],
+
+    WEATHERSTATS : { //TODO to be deleted
+        description: "Partly Cloudy",
+        temperature: 29,
+        feels_like: 27,
+        pressure: 30.1,
+        wind_deg: 272, 
+        wind_gust: 2.67, 
+        wind_speed: 3.09 
+    }
+
 } 
 
     

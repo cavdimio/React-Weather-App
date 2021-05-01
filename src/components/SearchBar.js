@@ -57,7 +57,7 @@ const SearchBar = ({ handleWeather, handleCityList }) => {
 
         var searchedCity;
 
-        const excludePart = "current,minutely,hourly,alerts"
+        const excludePart = "minutely,hourly,alerts"
         fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lngLat.lat}&lon=${lngLat.lng}&exclude=${excludePart}&units=metric&appid=${REACT_APP_WEATHER_API_KEY}`)
             .then( (response) => response.json())
             .then((forecastData) => {

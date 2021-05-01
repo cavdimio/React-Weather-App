@@ -6,7 +6,7 @@ import SearchBar from "./components/SearchBar";
 import LocationBox from "./components/LocationBox";
 import WelcomeMessage from "./components/WelcomeMessage";
 import ErrorHandling from "./components/ErrorHandling";
-import DesktopTab from "./components/DesktopTab";
+import WeatherTabs from "./components/WeatherTabs";
 import ReactGA from "react-ga";
 
 function App() {
@@ -55,7 +55,7 @@ function App() {
          ( /* User typed found city; show weather statistics */
           <>
             <LocationBox query={weather.query} />
-            <DesktopTab windowWidth={width} 
+            <WeatherTabs windowWidth={width} 
                         temperature={weather.weatherData.today.temperature}
                         typeOfWeather={weather.weatherData.today.description}
             />
