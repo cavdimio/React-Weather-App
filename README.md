@@ -84,3 +84,4 @@ This project is using the following APIs:
 - [ ] Add forecast.
 - [ ] Add relative domain.
 - [ ] Add interactive city map.
+- [ ] Configure CI/CD

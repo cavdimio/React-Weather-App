@@ -1,27 +1,71 @@
 /* Component that constructs the weather box */
 import { CONFIG } from "../utils/config";
-import styled from "styled-components"
+import { Container, Row, Col} from 'react-bootstrap';
+import cloud from "../assets/download.png";
 
-/* Styling for the div around the weather */
-const WeatherStyle = styled.div`
-  color: #fff;
-  font-size: 3rem;
-  font-weight: 700;
-  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
-`;
+const temperatureStyle = {
+  color: "white",
+  fontSize: "9rem",
+  fontWeight: "100",
+  lineHeight: "8.75rem"
+}
+
+const celciusStyle = {
+  color: "white",
+  fontSize: "3.3rem",
+  verticalAlign: "text-top",
+}
+
+const feelsLikeStyle = {
+  color: "white",
+  fontSize: "1.4rem",
+  paddingLeft: "1.25rem",
+  fontWeight: "500",
+}
+
+const descriptionStyle = {
+  color: "white",
+  fontSize: "1.4rem",
+  textAlign: "center",
+  fontWeight: "500",
+  paddingBottom: "1.5625rem"
+}
+
+const photo = {
+  display: "block",
+  marginTop: "20%",
+  marginLeft: "auto",
+  marginRight: "auto",
+  height: "6rem",
+  width: "12rem", 
+}
 
 /* Weather box component */
 const WeatherBox = () => {
     return (
-        <WeatherStyle>
-          description: {CONFIG.WEATHERSTATS.description} <br />
-          temperature: {CONFIG.WEATHERSTATS.temperature}°C <br />
-          feels like : {CONFIG.WEATHERSTATS.feels_like}°C <br />
-          pressure: {CONFIG.WEATHERSTATS.pressure}  <br />
-          wind_deg: {CONFIG.WEATHERSTATS.wind_deg}  <br />
-          wind_gust: {CONFIG.WEATHERSTATS.wind_gust}  <br />
-          wind_speed: {CONFIG.WEATHERSTATS.wind_speed}  <br /> 
-        </WeatherStyle>
+      <Container fluid={true}>
+        <Row>
+          <Col style={temperatureStyle}>
+            {CONFIG.WEATHERSTATS.temperature}
+            <span style={celciusStyle}>°C</span>
+          </Col>
+          <Col>
+            <Row>
+              <img src={cloud} alt="Cloud" style={photo} />
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col style={feelsLikeStyle}>
+            Feels like {CONFIG.WEATHERSTATS.feels_like}°C
+          </Col>
+          <Col style={descriptionStyle}>
+            {CONFIG.WEATHERSTATS.description}
+          </Col>
+        </Row>
+          {/* <span> Pressure: {CONFIG.WEATHERSTATS.pressure} </span> */}
+          
+      </Container>
     )
 }
 

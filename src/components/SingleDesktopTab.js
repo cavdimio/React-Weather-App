@@ -8,11 +8,11 @@ const WeatherBoxStyle = {
   marginLeft: "10%",
   position: "relative",
   display: "inline-block",
-  margin: "5px auto",
+  margin: "0.3125rem auto",
   background: "rgba(255, 255, 255, 0.2)",
-  borderRadius: "16px",
-  padding: "0px 25px",
-  boxShadow: "3px 6px rgba(0, 0, 0, 0.2)"
+  borderRadius: "1rem",
+  padding: "0 1.5625rem",
+  boxShadow: "0.1875rem 0.375rem rgba(0, 0, 0, 0.2)"
 }
 
 const SingleDesktopTab = ( { temperature, typeOfWeather } ) => {
